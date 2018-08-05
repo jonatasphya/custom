@@ -1,7 +1,7 @@
 (function () {
 
     // Change this to your GitHub username so you don't have to modify so many things.
-    var fork = "basicBot";
+    var fork = "jonatasphya";
 
     // Define our function responsible for extending the bot.
     function extend() {
@@ -37,6 +37,20 @@
             }
           }
         };
+        
+         // Example code for a bot command:
+        bot.commands.otimo = {
+          command: 'like',  // The command to be called. With the standard command literal this would be: !bacon
+          rank: 'user', // Minimum user permission to use the command
+          type: 'exact', // Specify if it can accept variables or not (if so, these have to be handled yourself through the chat.message
+          functionality: function (chat, cmd) {
+            if (this.type === 'exact' && chat.message.length !== cmd.length) return void (0);
+            if (!bot.commands.executable(this.rank, chat)) return void (0);
+            else {
+              API.sendChat("/me Música Ótima!");
+            }
+          }
+        };
 
         // Load the chat package again to account for any changes
         bot.loadChat();
@@ -46,7 +60,7 @@
     //Change the bots default settings and make sure they are loaded on launch
 
     localStorage.setItem("basicBotsettings", JSON.stringify({
-        botName: 'basicBot',
+        botName: 'GeekBot',
         language: 'english',
         chatLink: 'https://rawgit.com/basicBot/source/master/lang/en.json',
         scriptLink: 'https://rawgit.com/basicBot/source/master/basicBot.js',
